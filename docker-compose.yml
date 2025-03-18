@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  range-partition-db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: store
+    ports:
+      - "33060:3306"
+    networks:
+      - dev-network
+
+  hash-partition-db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: messaging
+    ports:
+      - "33061:3306"
+    networks:
+      - dev-network
+
+  local-index-db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: hr
+    ports:
+      - "33062:3306"
+    networks:
+      - dev-network
+
+networks:
+  dev-network:
+    driver: bridge
